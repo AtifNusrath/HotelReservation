@@ -6,7 +6,6 @@ public class Hotel {
     int rate;
     String name;
     private int rating;
-    private int totalRate;
     private int weekendRate;
     private int weekdayRate;
 

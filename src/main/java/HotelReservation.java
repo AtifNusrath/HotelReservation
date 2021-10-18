@@ -62,8 +62,7 @@ class HotelReservation {
                     result.setRating(hotel.getRating());
                     return result;
                 })
-                .sorted(Comparator.comparing(Result::getTotalRate).thenComparing(Result::getRating,
-                        Comparator.reverseOrder()))
+                .sorted(Comparator.comparing(Result::getTotalRate).thenComparing(Result::getRating, Comparator.reverseOrder()))
                 .collect(Collectors.toList());
 
         return results.stream()
@@ -73,11 +72,32 @@ class HotelReservation {
                 .collect(Collectors.toList());
     }
 
+    public static List<Result> findBestRatedHotel(String initialDateRange, String endDateRange) {
+        LocalDate initialDate = LocalDate.parse(initialDateRange, DATE_RANGE_FORMAT);
+        LocalDate endDate = LocalDate.parse(endDateRange, DATE_RANGE_FORMAT);
+
+        List<Result> results = hotels.stream()
+                .map(hotel -> {
+                    Result result = new Result();
+                    result.setHotelName(hotel.getName());
+                    result.setTotalRate(hotel.getTotalRate(initialDate, endDate));
+                    result.setRating(hotel.getRating());
+                    return result;
+                })
+                .sorted(Comparator.comparing(Result::getRating, Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+
+        return results.stream()
+                .filter(result -> result.getRating() == results.get(0).getRating())
+                .collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Hotel Reservation System");
         boolean flag = true;
         while (true) {
-            System.out.println("Select option\n 1. Add hotel\n 2. Display\n 3. Cheapest rate \n 4. Cheapest rated hotel\n 5. Exit\n");
+            System.out.println("Select option\n 1. Add hotel\n 2. Display\n 3. Cheapest rate \n " +
+                    "4. Cheapest rated hotel\n 5. Best rated hotel\n 6. Exit\n");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -93,6 +113,9 @@ class HotelReservation {
                     System.out.println(findCheapestBestRatedHotel("10Sep2020", "11Sep2020"));
                     break;
                 case 5:
+                    System.out.println(findBestRatedHotel("10Sep2020", "11Sep2020"));
+                    break;
+                case 6:
                     flag = false;
                     break;
             }
