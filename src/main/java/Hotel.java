@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 public class Hotel {
     int rate;
     String name;
+    private int rating;
     private int totalRate;
     private int weekendRate;
     private int weekdayRate;
@@ -53,12 +54,21 @@ public class Hotel {
         this.rate = rate;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
                 "name='" + name + '\'' +
-                ", weekdayRate=" + weekdayRate +
+                ", rating=" + rating +
                 ", weekendRate=" + weekendRate +
+                ", weekdayRate=" + weekdayRate +
                 '}';
     }
 }

@@ -20,6 +20,8 @@ class HotelReservation {
         hotel.setWeekdayRate(scanner.nextInt());
         System.out.println("Enter hotel weekend rate: ");
         hotel.setWeekendRate(scanner.nextInt());
+        System.out.println("Enter hotel rating: ");
+        hotel.setRating(scanner.nextInt());
         hotels.add(hotel);
         System.out.println("Hotel Added");
         count++;
