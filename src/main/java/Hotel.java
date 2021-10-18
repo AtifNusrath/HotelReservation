@@ -43,7 +43,7 @@ public class Hotel {
                     }
                     return getWeekdayRate();
                 })
-                .reduce((total, next) -> total).get();
+                .reduce((total, next) -> total + next).get();
     }
 
     public int getRate() {
