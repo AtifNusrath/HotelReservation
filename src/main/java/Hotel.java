@@ -1,6 +1,12 @@
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Hotel {
-    int rating;
+    int rate;
     String name;
+    private int totalRate;
+
+
     public String getName() {
         return name;
     }
@@ -9,11 +15,25 @@ public class Hotel {
         this.name = name;
     }
 
-    public int getRating() {
-        return rating;
+    public int getTotalRate(LocalDate initialDate, LocalDate endDate) {
+
+        totalRate = rate * 2;
+        return totalRate;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "rate=" + rate +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
