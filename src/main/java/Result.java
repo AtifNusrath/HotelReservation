@@ -4,6 +4,15 @@ public class Result {
     private int totalRate;
     private int rating;
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "hotelName='" + hotelName + '\'' +
+                ", rating=" + rating +
+                ", totalRate=" + totalRate +
+                '}';
+    }
+
     public int getRating() {
         return rating;
     }
@@ -28,11 +37,4 @@ public class Result {
         this.totalRate = totalRate;
     }
 
-    @Override
-    public String toString() {
-        return "Result{" +
-                "hotelName='" + hotelName + '\'' +
-                ", totalRate=" + totalRate +
-                '}';
-    }
 }

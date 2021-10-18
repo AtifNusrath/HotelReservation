@@ -32,6 +32,7 @@ class HotelReservation {
         hotelReservation.addHotel(lakewood);
         hotelReservation.addHotel(bridgewood);
         hotelReservation.addHotel(ridgewood);
+        System.out.println("Hotels added");
         count++;
     }
 
@@ -102,7 +103,6 @@ class HotelReservation {
 
     public void addHotel(Hotel hotel) {
         hotels.add(hotel);
-        System.out.println("Hotel added");
     }
 
     public static void main(String[] args) {
@@ -110,7 +110,8 @@ class HotelReservation {
         boolean flag = true;
         while (true) {
             System.out.println("Select option\n 1. Add hotel\n 2. Display\n 3. Cheapest rate \n " +
-                    "4. Cheapest rated hotel\n 5. Best rated hotel\n 6. Reward Customer\n 7. Exit\n");
+                    "4. Cheapest rated hotel\n 5. Best rated hotel\n 6. Reward Customer\n 7. Cheapest rated hotel for reward customer\n" +
+                    "8. Exit\n");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -130,6 +131,9 @@ class HotelReservation {
                     System.out.println(findBestRatedHotel(Customer.REGULAR, "10Sep2020", "11Sep2020"));
                     break;
                 case 7:
+                    System.out.println(findCheapestBestRatedHotel(Customer.REWARD, "10Sep2020", "11Sep2020"));
+                    break;
+                case 8:
                     flag = false;
                     break;
             }
