@@ -1,28 +1,34 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class Hotel {
-    int rate;
-    String name;
     private int rating;
-    private int weekendRate;
-    private int weekdayRate;
+    private String name;
+    private Map<Customer, Rate> rate;
 
-    public int getWeekendRate() {
-        return weekendRate;
+    public Hotel(String name, int rating, HashMap<Customer, Rate> rate) {
+        this.name = name;
+        this.rating = rating;
+        this.rate = rate;
     }
 
-    public void setWeekendRate(int weekendRate) {
-        this.weekendRate = weekendRate;
+    public Hotel() {
+
     }
 
-    public int getWeekdayRate() {
-        return weekdayRate;
-    }
 
-    public void setWeekdayRate(int weekdayRate) {
-        this.weekdayRate = weekdayRate;
+    public int getTotalRate(Customer customerType, LocalDate initialDate, LocalDate endDate) {
+        return Stream.iterate(initialDate, date -> date.plusDays(1))
+                .limit(endDate.getDayOfMonth() - initialDate.getDayOfMonth() + 1)
+                .map(date -> {
+                    if (date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+                        return this.rate.get(customerType).getWeekendRate();
+                    return this.rate.get(customerType).getWeekdayRate();
+                })
+                .reduce((total, next) -> total + next).get();
     }
 
     public String getName() {
@@ -33,23 +39,11 @@ public class Hotel {
         this.name = name;
     }
 
-    public int getTotalRate(LocalDate initialDate, LocalDate endDate) {
-        return Stream.iterate(initialDate, date -> date.plusDays(1))
-                .limit(endDate.getDayOfMonth() - initialDate.getDayOfMonth() + 1)
-                .map(date -> {
-                    if (date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                        return getWeekendRate();
-                    }
-                    return getWeekdayRate();
-                })
-                .reduce((total, next) -> total + next).get();
-    }
-
-    public int getRate() {
+    public Map<Customer, Rate> getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(HashMap<Customer, Rate> rate) {
         this.rate = rate;
     }
 
@@ -66,8 +60,6 @@ public class Hotel {
         return "Hotel{" +
                 "name='" + name + '\'' +
                 ", rating=" + rating +
-                ", weekendRate=" + weekendRate +
-                ", weekdayRate=" + weekdayRate +
                 '}';
     }
 }
