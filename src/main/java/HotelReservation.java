@@ -111,7 +111,7 @@ class HotelReservation {
         while (true) {
             System.out.println("Select option\n 1. Add hotel\n 2. Display\n 3. Cheapest rate \n " +
                     "4. Cheapest rated hotel\n 5. Best rated hotel\n 6. Reward Customer\n 7. Cheapest rated hotel for reward customer\n" +
-                    "8. Exit\n");
+                    " 8. Cheapest rated hotel for regular customer\n 9. Exit\n");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -125,6 +125,7 @@ class HotelReservation {
                     System.out.println(findCheapestHotel(Customer.REGULAR, "10Sep2020", "11Sep2020"));
                     break;
                 case 4:
+                case 8:
                     System.out.println(findCheapestBestRatedHotel(Customer.REGULAR, "10Sep2020", "11Sep2020"));
                     break;
                 case 5:
@@ -133,8 +134,11 @@ class HotelReservation {
                 case 7:
                     System.out.println(findCheapestBestRatedHotel(Customer.REWARD, "10Sep2020", "11Sep2020"));
                     break;
-                case 8:
+                case 9:
                     flag = false;
+                    break;
+                default:
+                    System.out.println("Invalid Choice!!!");
                     break;
             }
         }
