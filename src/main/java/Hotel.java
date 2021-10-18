@@ -1,5 +1,6 @@
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Period;
+import java.util.stream.Stream;
 
 public class Hotel {
     int rate;
@@ -33,9 +34,15 @@ public class Hotel {
     }
 
     public int getTotalRate(LocalDate initialDate, LocalDate endDate) {
-
-        totalRate = rate * 2;
-        return totalRate;
+        return Stream.iterate(initialDate, date -> date.plusDays(1))
+                .limit(endDate.getDayOfMonth() - initialDate.getDayOfMonth() + 1)
+                .map(date -> {
+                    if (date.getDayOfWeek().equals(DayOfWeek.SATURDAY) || date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                        return getWeekendRate();
+                    }
+                    return getWeekdayRate();
+                })
+                .reduce((total, next) -> total).get();
     }
 
     public int getRate() {
@@ -50,8 +57,8 @@ public class Hotel {
     public String toString() {
         return "Hotel{" +
                 "name='" + name + '\'' +
-                ", weekendRate=" + weekendRate +
                 ", weekdayRate=" + weekdayRate +
+                ", weekendRate=" + weekendRate +
                 '}';
     }
 }

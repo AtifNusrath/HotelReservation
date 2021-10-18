@@ -62,7 +62,7 @@ class HotelReservation {
                     display();
                     break;
                 case 3:
-                    System.out.println(findCheapestHotel("11Jun2021", "12Jun2021"));
+                    System.out.println(findCheapestHotel("10Sep2020", "11Sep2020"));
                     break;
                 case 4:
                     flag = false;
