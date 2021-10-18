@@ -16,8 +16,10 @@ class HotelReservation {
         Hotel hotel = new Hotel();
         System.out.println("Enter hotel name: ");
         hotel.setName(scanner.next());
-        System.out.println("Enter hotel rate: ");
-        hotel.setRate(scanner.nextInt());
+        System.out.println("Enter hotel weekday rate: ");
+        hotel.setWeekdayRate(scanner.nextInt());
+        System.out.println("Enter hotel weekend rate: ");
+        hotel.setWeekendRate(scanner.nextInt());
         hotels.add(hotel);
         System.out.println("Hotel Added");
         count++;
